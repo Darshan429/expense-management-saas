@@ -1,0 +1,9 @@
+$kind: http-request
+name: Get Budgets
+method: GET
+url: '{{baseUrl}}/api/budgets'
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'

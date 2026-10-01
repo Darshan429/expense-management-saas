@@ -1,0 +1,9 @@
+$kind: http-request
+name: Get Expense by ID
+method: GET
+url: '{{baseUrl}}/api/expenses/{{expenseId}}'
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'

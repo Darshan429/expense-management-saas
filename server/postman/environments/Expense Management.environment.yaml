@@ -1,0 +1,12 @@
+name: Expense Management
+values:
+  - key: baseUrl
+    value: 'http://localhost:5000'
+    enabled: true
+  - key: accessToken
+    value: ''
+    enabled: true
+    type: secret
+  - key: expenseId
+    value: '1'
+    enabled: true

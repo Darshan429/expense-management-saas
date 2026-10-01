@@ -1,0 +1,7 @@
+$kind: collection
+name: Expense Management API
+variables:
+  - key: baseUrl
+    value: 'http://localhost:5000'
+  - key: accessToken
+    value: ''
