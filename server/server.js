@@ -15,15 +15,28 @@ const server = http.createServer(app); // wrap express in http server
 // ── Socket.io setup ─────────────────────────────────────────────────────────
 
 const allowedOrigins = [
-  'http://localhost:5173',                    
-  process.env.CLIENT_URL,                    
-].filter(Boolean);
+  'http://localhost:3000',
+  'http://localhost:5173'
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  },
+    origin: allowedOrigins,
+    credentials: true
+  }
 });
 
 // Store io globally so services can access it
@@ -75,7 +88,6 @@ io.on("connection", (socket) => {
 
 // ── Express middleware ───────────────────────────────────────────────────────
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 
 // ── Routes ───────────────────────────────────────────────────────────────────
